@@ -7,7 +7,8 @@ import 'cart_screen.dart';
 import 'product_detail.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  final ApiService _apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.view_list),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
+              MaterialPageRoute(builder: (_) => AllCategoryScreen()),
             ),
           ),
           IconButton(
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: FutureBuilder(
-            future: getAllProducts(),
+            future: _apiService.getAllProducts(),
             builder: (_, AsyncSnapshot<List<Product>> snapshot) {
               if (!snapshot.hasData) {
                 return const CircularProgressIndicator();
@@ -49,18 +50,18 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: ((context, index) {
                   final product = snapshot.data![index];
                   return ListTile(
-                    title: Text('[title]'),
+                    title: Text(product.title[index]),
                     leading: Image.network(
-                      '[image]',
+                      product.image[index],
                       height: 50,
                       width: 50,
                     ),
-                    subtitle: Text('\$price}'),
+                    subtitle: Text(product.price.toString()[index]),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => ProductDetailScreen(),
+                          builder: (_) => ProductDetailScreen(id: product.id),
                         ),
                       );
                     },
