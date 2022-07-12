@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:mutya_fake_store_api/models/api_response.dart';
 import 'dart:convert';
 
+import '../models/cart.dart';
 import '../models/product.dart';
 
 class ApiService {
@@ -35,4 +36,37 @@ class ApiService {
       return product;
     }).catchError((err) => print(err));
   }
+
+  Future<Product> getProduct(int id) async {
+    return http.get(Uri.parse('$baseUrl/products/$id')).then((data) {
+      Product product = Product();
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        product = Product.fromJson(jsonData);
+      }
+      return product;
+    }).catchError((err) => print(err));
+  }
+
+  Future<Cart?> getCart(int userId) async {
+    return http.get(Uri.parse('$baseUrl/carts/$userId')).then((data) {
+      Cart cart = Cart();
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        cart = Cart.fromJson(jsonData);
+      }
+      return cart;
+    }).catchError((err) => print(err));
+  }
+
+  //  Future<Cart> updateCart(int userId, int id) async {
+  //   return http.put(Uri.parse('$baseUrl/carts/$id')).then((data) {
+  //     Cart cart = Cart();
+  //     if (data.statusCode == 204) {
+  //       final jsonData = json.encode(data.body);
+  //       cart = Cart.fromJson(jsonData);
+  //     }
+  //     return cart;
+  //   }).catchError((err) => print(err));
+  // }
 }

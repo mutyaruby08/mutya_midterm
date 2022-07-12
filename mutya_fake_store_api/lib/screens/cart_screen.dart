@@ -5,7 +5,8 @@ import '../models/product.dart';
 import '../services/api_service.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
+ CartScreen({Key? key}) : super(key: key);
+  ApiService _apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CartScreen extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
       body: FutureBuilder(
-        future: getCart('1'),
+        future: _apiService.getCart('1'),
         builder: (BuildContext context, AsyncSnapshot<Cart?> cartSnapshot) {
           if (!cartSnapshot.hasData) {
             return const Center(child: CircularProgressIndicator());

@@ -5,7 +5,7 @@ import '../services/api_service.dart';
 
 class AllCategoryScreen extends StatelessWidget {
   AllCategoryScreen({Key? key}) : super(key: key);
-  ApiService _apiService = ApiService();
+  final ApiService _apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class AllCategoryScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (_) => ProductsByCategoryScreen(
-                          categoryName: categoryName,
+                          categoryName: _apiService.categoryName,
                         ),
                       ),
                     ),
