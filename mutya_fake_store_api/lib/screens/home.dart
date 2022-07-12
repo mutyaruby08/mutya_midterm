@@ -52,23 +52,22 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: ((context, index) {
                   final product = snapshot.data![index];
                   return ListTile(
-                      title: Text(product.title!),
-                      leading: Image.network(
-                        product.image ?? '',
-                        height: 50,
-                        width: 50,
-                      ),
-                      subtitle: Text('\$${product.price}'),
-                      onTap:
-                          () {} /*{
+                    title: Text(product.title!),
+                    leading: Image.network(
+                      product.image ?? '',
+                      height: 50,
+                      width: 50,
+                    ),
+                    subtitle: Text('\$${product.price}'),
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => ProductDetailScreen(id: product.id!),
+                          builder: (_) => ProductDetailScreen(id: index + 1),
                         ),
                       );
-                    },*/
-                      );
+                    },
+                  );
                 }),
               );
             }),

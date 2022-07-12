@@ -7,7 +7,7 @@ import 'home.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  ApiService get service => GetIt.I<ApiService>();
+  ApiService get _apiService => GetIt.I<ApiService>();
 
   final TextEditingController nameCtrl = TextEditingController(
     text: 'mor_2314',
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
               height: 60,
               child: ElevatedButton(
                 onPressed: () async {
-                  final getToken = await service.login(
+                  final getToken = await _apiService.login(
                     nameCtrl.text,
                     passwordCtrl.text,
                   );
