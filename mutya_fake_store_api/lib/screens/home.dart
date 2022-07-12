@@ -7,7 +7,7 @@ import 'cart_screen.dart';
 import 'product_detail.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   ApiService get _apiService => GetIt.I<ApiService>();
 

@@ -1,9 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:mutya_fake_store_api/models/cart.dart';
 import 'dart:convert';
-
 import 'package:mutya_fake_store_api/models/product.dart';
-
 import '../models/cart_update.dart';
 
 class ApiService {
@@ -98,7 +96,7 @@ class ApiService {
         print(data.statusCode);
         print(jsonData);
       }
-    }).catchError((err) => print(err));
+    }).catchError((error) => print(error));
   }
 
   Future<void> updateCart(int cartId, int productId) {
@@ -115,6 +113,6 @@ class ApiService {
         print(data.statusCode);
         print(jsonData);
       }
-    }).catchError((err) => print(err));
+    }).catchError((error) => print(error));
   }
 }
