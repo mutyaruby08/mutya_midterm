@@ -48,7 +48,7 @@ class ApiService {
     }).catchError((err) => print(err));
   }
 
-  Future<Cart?> getCart(int userId) async {
+  Future<Cart?> getCart(String userId) async {
     return http.get(Uri.parse('$baseUrl/carts/$userId')).then((data) {
       Cart cart = Cart();
       if (data.statusCode == 200) {
@@ -56,6 +56,15 @@ class ApiService {
         cart = Cart.fromJson(jsonData);
       }
       return cart;
+    }).catchError((err) => print(err));
+  }
+
+  Future<bool> deleteCart(String userId) async {
+    return http.delete(Uri.parse('$baseUrl/carts/$userId')).then((data) {
+      if (data.statusCode == 204) {
+        return true;
+      }
+      return false;
     }).catchError((err) => print(err));
   }
 
