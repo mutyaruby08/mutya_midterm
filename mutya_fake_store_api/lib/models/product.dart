@@ -1,7 +1,7 @@
 class Product {
   int? id;
   String? title;
-  double? price;
+  num? price;
   String? category;
   String? description;
   String? image;
