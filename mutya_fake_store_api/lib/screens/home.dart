@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../models/product.dart';
 import '../services/api_service.dart';
@@ -7,8 +8,8 @@ import 'cart_screen.dart';
 import 'product_detail.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-  final ApiService _apiService = ApiService();
+  const HomeScreen({Key? key}) : super(key: key);
+  ApiService get _apiService => GetIt.instance<ApiService>();
 
   @override
   Widget build(BuildContext context) {
