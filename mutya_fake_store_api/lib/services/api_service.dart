@@ -70,12 +70,15 @@ class ApiService {
     }).catchError((error) => print(error));
   }
 
-  Future<bool> deleteCart(String id) async {
-    return http.delete(Uri.parse('$baseUrl/carts/$id')).then((data) {
-      if (data.statusCode == 204) {
-        return true;
+  Future<void> deleteCart(String id) async {
+    return http
+        .delete(Uri.parse('$baseUrl/carts/$id'), headers: headers)
+        .then((data) {
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        print(data.statusCode);
+        print(jsonData);
       }
-      return false;
-    }).catchError((error) => print(error));
+    }).catchError((err) => print(err));
   }
 }
