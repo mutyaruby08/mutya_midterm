@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mutya_fake_store_api/services/api_service.dart';
-
 import 'screens/login_screen.dart';
 
 void setupLocator() {

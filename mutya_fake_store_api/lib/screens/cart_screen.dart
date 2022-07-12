@@ -61,6 +61,7 @@ class CartScreen extends StatelessWidget {
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () async {
                         await _apiService.deleteCart('1');
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Cart deleted successfully.'),
