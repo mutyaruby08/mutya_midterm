@@ -9,8 +9,8 @@ void setupLocator() {
 }
 
 void main() {
-  runApp(const MyApp());
   setupLocator();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
