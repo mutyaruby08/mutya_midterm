@@ -5,7 +5,7 @@ import 'package:mutya_fake_store_api/services/api_service.dart';
 import 'screens/login_screen.dart';
 
 void setupLocator() {
-  GetIt.instance.registerSingleton(() => ApiService());
+  GetIt.instance.registerLazySingleton(() => ApiService());
 }
 
 void main() {
