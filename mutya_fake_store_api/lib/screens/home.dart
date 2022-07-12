@@ -20,13 +20,12 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         actions: [
           IconButton(
-              icon: const Icon(Icons.view_list),
-              onPressed: () =>
-                  {} /*Navigator.push(
+            icon: const Icon(Icons.view_list),
+            onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => AllCategoryScreen()),
-            ),*/
-              ),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () => Navigator.push(
