@@ -1,5 +1,3 @@
-import 'package:mutya_fake_store_api/models/products.dart';
-
 class Cart {
   int? id;
   int? userId;
