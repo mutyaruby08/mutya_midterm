@@ -9,7 +9,7 @@ import 'product_detail.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  ApiService get service => GetIt.I<ApiService>();
+  ApiService get _apiService => GetIt.I<ApiService>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: FutureBuilder(
-            future: service.getAllProducts(),
+            future: _apiService.getAllProducts(),
             builder: (_, AsyncSnapshot<List<Product>> snapshot) {
               if (!snapshot.hasData) {
                 return const CircularProgressIndicator();

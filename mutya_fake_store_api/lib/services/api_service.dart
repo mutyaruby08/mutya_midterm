@@ -19,20 +19,6 @@ class ApiService {
     return response.body;
   }
 
-  Future<List<String>> getAllCategories() {
-    return http.get(Uri.parse('$baseUrl/products/categories')).then((data) {
-      final categories = <String>[];
-      if (data.statusCode == 200) {
-        final jsonData = json.decode(data.body);
-
-        for (var item in jsonData) {
-          categories.add(item);
-        }
-      }
-      return categories;
-    }).catchError((e) => print(e));
-  }
-
   Future<List<Product>> getAllProducts() async {
     return http
         .get(Uri.parse('$baseUrl/products'), headers: headers)
@@ -45,7 +31,7 @@ class ApiService {
         }
       }
       return products;
-    }).catchError((err) => print(err));
+    }).catchError((error) => print(error));
   }
 
   Future<Product> getProduct(int id) async {
@@ -56,7 +42,21 @@ class ApiService {
         product = Product.fromJson(jsonData);
       }
       return product;
-    }).catchError((err) => print(err));
+    }).catchError((error) => print(error));
+  }
+
+  Future<List<String>> getAllCategories() {
+    return http.get(Uri.parse('$baseUrl/products/categories')).then((data) {
+      final categories = <String>[];
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+
+        for (var item in jsonData) {
+          categories.add(item);
+        }
+      }
+      return categories;
+    }).catchError((error) => print(error));
   }
 
   Future<Cart?> getCart(String userId) async {
@@ -67,7 +67,7 @@ class ApiService {
         cart = Cart.fromJson(jsonData);
       }
       return cart;
-    }).catchError((err) => print(err));
+    }).catchError((error) => print(error));
   }
 
   Future<bool> deleteCart(String id) async {
@@ -76,6 +76,6 @@ class ApiService {
         return true;
       }
       return false;
-    }).catchError((err) => print(err));
+    }).catchError((error) => print(error));
   }
 }
