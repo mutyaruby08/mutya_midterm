@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:get_it/get_it.dart';
 import '../models/cart.dart';
 import '../models/product.dart';
 import '../services/api_service.dart';
 
 class CartScreen extends StatelessWidget {
- CartScreen({Key? key}) : super(key: key);
-  ApiService _apiService = ApiService();
+  CartScreen({Key? key}) : super(key: key);
+  ApiService get _apiService => GetIt.instance<ApiService>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,12 @@ class CartScreen extends StatelessWidget {
 
           final products = cartSnapshot.data!.products;
           return ListView.separated(
-            itemCount: products.length,
+            itemCount: products!.length,
             separatorBuilder: (_, __) => const Divider(thickness: 1),
             itemBuilder: (_, index) {
               final product = products[index];
               return FutureBuilder(
-                future: getProduct(product.productId),
+                future: _apiService.getProduct(product.productId!),
                 builder: (BuildContext context,
                     AsyncSnapshot<Product?> productSnapshot) {
                   if (!productSnapshot.hasData) {
@@ -49,23 +49,25 @@ class CartScreen extends StatelessWidget {
                   }
 
                   return ListTile(
-                    title: Text(p.title),
+                    title: Text(p.title!),
                     leading: Image.network(
                       '[image]',
                       height: 40,
                     ),
                     subtitle: Text(
-                      'Quantity: '[$quantity]',
+                      'Quantity: ${product.quantity}',
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () async {
-                        await deleteCart('1');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Cart deleted successfully.'),
-                          ),
-                        );
+                        final deleteResult = await _apiService.deleteCart('1');
+                        if (deleteResult) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Cart deleted successfully.'),
+                            ),
+                          );
+                        }
                       },
                     ),
                   );
